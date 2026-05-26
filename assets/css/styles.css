@@ -114,9 +114,9 @@ ul{margin:0;padding:0;list-style:none}
 .header__phone svg{width:18px;height:18px;fill:var(--accent)}
 .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;background:var(--bg-soft);border:none;border-radius:12px;cursor:pointer}
 .nav-toggle span{display:block;width:20px;height:2px;background:var(--brand);margin:0 auto;border-radius:2px;transition:.25s}
-.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0}
-.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+/* keep the 3 bars visible when open (no X morph); highlight the button instead */
+.nav-toggle[aria-expanded="true"]{background:var(--accent);}
+.nav-toggle[aria-expanded="true"] span{background:#06343b}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;background:linear-gradient(165deg,#ffffff 0%,#f4fbfc 45%,#e7f5f8 100%);border-radius:0 0 48px 48px;overflow:hidden;padding:58px 0 72px}
@@ -355,14 +355,14 @@ ul{margin:0;padding:0;list-style:none}
   /* backdrop-filter on the header would trap the fixed drawer inside it,
      so turn it off on mobile and use a solid header background instead */
   .header{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff;z-index:1001}
-  .nav{position:fixed;inset:0 0 0 auto;width:min(330px,84vw);height:100%;height:100dvh;flex-direction:column;align-items:stretch;gap:2px;background:#fff;padding:88px 24px 28px;box-shadow:var(--shadow-lg);transform:translateX(100%);transition:transform .3s ease;z-index:1000;overflow-y:auto}
-  .nav.open{transform:none}
-  .nav>a{padding:14px 4px;border-bottom:1px solid var(--line);font-size:1rem}
+  /* full-width dropdown that opens downward from the header (like a standard mobile menu) */
+  .nav{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:#fff;padding:4px 24px 22px;box-shadow:0 26px 34px -20px rgba(31,50,59,.55);border-top:1px solid var(--line);border-radius:0 0 18px 18px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .22s ease,transform .22s ease,visibility .22s;z-index:1000;max-height:calc(100dvh - 110px);overflow-y:auto}
+  .nav.open{opacity:1;visibility:visible;transform:none}
+  .nav>a{padding:15px 2px;border-bottom:1px solid var(--line);font-size:1rem}
   .nav>a:not(.nav__cta)::after{display:none}
-  .nav__cta{margin-top:14px;border-bottom:none}
+  .nav__cta{margin-top:16px;border-bottom:none;justify-content:center}
   .nav-toggle{display:flex}
   body.nav-open{overflow:hidden}
-  body.nav-open::after{content:"";position:fixed;inset:0;background:rgba(31,50,59,.5);z-index:990}
 }
 @media (max-width:760px){
   .section{padding:60px 0}
