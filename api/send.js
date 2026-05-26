@@ -22,7 +22,7 @@ const TO_EMAIL = process.env.TO_EMAIL || "info@louvredental.ca";
 const FROM_EMAIL = process.env.FROM_EMAIL || process.env.SMTP_USER || "no-reply@louvredental.ca";
 const FROM_NAME = "Louvre Dental website";
 const SITE_URL = process.env.SITE_URL || "https://louvredental.ca";
-const EMAIL_SUBJECT = "New Appointment Request — Louvre Dental Centre";
+const EMAIL_SUBJECT = "New appointment request from your website";
 
 const safeStr = (v) => String(v == null ? "" : v).trim();
 const stripCRLF = (v) => safeStr(v).replace(/[\r\n]+/g, " ").slice(0, 500);
@@ -65,42 +65,37 @@ async function readBody(req) {
 function buildPlainText(f) {
   const d = (v) => v || "-";
   return [
-    "New appointment request from louvredental.ca",
+    "New appointment request from the Louvre Dental website.",
     "",
     "Name:           " + d(f.name),
     "Phone:          " + d(f.phone),
     "Email:          " + d(f.email),
-    "Patient type:   " + d(f.patient),
-    "Service:        " + d(f.service),
-    "Preferred time: " + d(f.preferred),
+    "Preferred date: " + d(f.preferred),
     "",
     "Message:",
     f.message || "-",
     "",
-    "---",
-    "Submitted: " + f.submittedAt,
+    "Reply to this email to respond to the patient.",
+    "Submitted " + f.submittedAt,
   ].join("\n");
 }
 
 function buildHtml(f) {
   const E = escapeHtml;
   const row = (l, v) =>
-    '<tr><td style="padding:5px 18px 5px 0;color:#5c6f78;white-space:nowrap;vertical-align:top">' + E(l) +
-    '</td><td style="padding:5px 0;color:#1f323b;vertical-align:top"><strong>' + E(v || "-") + "</strong></td></tr>";
+    '<p style="margin:0 0 6px"><strong style="display:inline-block;min-width:140px;color:#555">' +
+    E(l) + ':</strong> ' + E(v || "-") + "</p>";
   const msg = f.message
-    ? '<h3 style="font:600 16px/1.3 system-ui,sans-serif;color:#365362;margin:18px 0 6px">Message</h3>' +
-      '<p style="font:14px/1.6 system-ui,sans-serif;color:#1f323b;margin:0;white-space:pre-wrap">' + E(f.message) + "</p>"
+    ? '<p style="margin:14px 0 0"><strong style="color:#555">Message:</strong><br>' +
+      '<span style="white-space:pre-wrap">' + E(f.message) + "</span></p>"
     : "";
-  return '<!doctype html><html><body style="margin:0;padding:24px;background:#f8f9fb;font-family:system-ui,sans-serif">' +
-    '<div style="max-width:560px;margin:0 auto;background:#fff;border-radius:14px;padding:26px;border:1px solid #e2eaee">' +
-    '<h2 style="font:600 20px/1.2 Georgia,serif;color:#365362;margin:0 0 4px">New appointment request</h2>' +
-    '<p style="font:13px/1.5 system-ui,sans-serif;color:#5c6f78;margin:0 0 14px">via louvredental.ca</p>' +
-    '<table style="border-collapse:collapse;font:14px/1.5 system-ui,sans-serif;width:100%">' +
+  return '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#222;max-width:560px">' +
+    '<p style="margin:0 0 14px">You have a new appointment request from the Louvre Dental website:</p>' +
     row("Name", f.name) + row("Phone", f.phone) + row("Email", f.email) +
-    row("Patient type", f.patient) + row("Service", f.service) + row("Preferred time", f.preferred) +
-    "</table>" + msg +
-    '<p style="font:12px/1.5 system-ui,sans-serif;color:#9fb0b8;margin:22px 0 0;border-top:1px solid #eef2f4;padding-top:10px">Submitted ' +
-    E(f.submittedAt) + "</p></div></body></html>";
+    row("Preferred date", f.preferred) +
+    msg +
+    '<p style="margin:18px 0 0;color:#888;font-size:13px">Reply to this email to respond to the patient. Submitted ' +
+    E(f.submittedAt) + ".</p></div>";
 }
 
 module.exports = async (req, res) => {

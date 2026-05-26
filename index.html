@@ -278,9 +278,9 @@
 <section class="hero">
   <div class="container hero__inner">
     <div class="hero__copy">
-      <p class="eyebrow">Family · Cosmetic · Emergency Dentistry in Paris, ON</p>
-      <h1>Your family's smile, <span>beautifully&nbsp;cared&nbsp;for.</span></h1>
-      <p class="hero__lead">Louvre Dental Centre blends gentle, modern dentistry with the latest technology — comprehensive care for the whole family, right here on Rest Acres Road in Paris, Ontario.</p>
+      <p class="eyebrow">Family · Cosmetic · Emergency Dentistry</p>
+      <h1>Louvre Dental Centre <span>your family dentist in Paris, Ontario</span></h1>
+      <p class="hero__lead">Beautiful, healthy smiles for the whole family — gentle, modern dentistry with the latest technology, right here on Rest Acres Road.</p>
 
       <div class="hero__cta">
         <a class="btn btn--primary btn--lg" href="#appointment">Request an Appointment</a>
@@ -301,12 +301,12 @@
     <div class="hero__media">
       <div class="hero__frame">
         <img src="/assets/images/exterior.webp" alt="Exterior of Louvre Dental Centre on Rest Acres Road in Paris, Ontario" width="1366" height="1024" fetchpriority="high" />
-      </div>
-      <div class="hero__badge">
-        <span class="hero__badge-stars" aria-hidden="true">★★★★★</span>
-        <div>
-          <strong>Loved by local families</strong>
-          <small>Gentle care in Paris, ON</small>
+        <div class="hero__badge">
+          <span class="hero__badge-stars" aria-hidden="true">★★★★★</span>
+          <div>
+            <strong>Trusted by Paris families</strong>
+            <small>Gentle care, 5-star reviews</small>
+          </div>
         </div>
       </div>
     </div>
@@ -318,64 +318,42 @@
   <div class="container">
     <div class="appointment__card">
       <div class="appointment__intro">
-        <p class="eyebrow eyebrow--accent">Book in under a minute</p>
-        <h2 id="appt-title">Request your appointment</h2>
-        <p>Tell us what you need and our team will confirm your visit within one business day — or call us at <a href="tel:+15194420132">(519)&nbsp;442-0132</a>.</p>
-        <ul class="appointment__perks">
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> No-obligation request</li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> Evening &amp; Saturday slots</li>
-          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg> New patients &amp; emergencies welcome</li>
-        </ul>
+        <p class="eyebrow eyebrow--accent">Easy booking</p>
+        <h2 id="appt-title">Request an Appointment</h2>
+        <p>We'll confirm by phone within 24 hours — or call <a href="tel:+15194420132">(519)&nbsp;442-0132</a>.</p>
       </div>
 
       <form class="appointment__form" id="apptForm" action="/api/send" method="post" novalidate>
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
-        <div class="field">
-          <label for="name">Full name <span aria-hidden="true">*</span></label>
-          <input type="text" id="name" name="name" autocomplete="name" required />
+        <div class="appointment__row">
+          <div class="field">
+            <label for="name">Full Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone Number <span aria-hidden="true">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(519) 555-0123" required />
+          </div>
+          <div class="field">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" />
+          </div>
+          <div class="field">
+            <label for="preferred">Preferred Date</label>
+            <input type="date" id="preferred" name="preferred" />
+          </div>
         </div>
         <div class="field">
-          <label for="phone">Phone <span aria-hidden="true">*</span></label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel" required />
+          <label for="message">Message / Notes <span class="field__opt">(optional)</span></label>
+          <textarea id="message" name="message" rows="3" placeholder="Reason for visit, dental concerns, insurance questions, best time to call back…"></textarea>
         </div>
-        <div class="field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" />
-        </div>
-        <div class="field">
-          <label for="patient">Are you a new patient?</label>
-          <select id="patient" name="patient">
-            <option value="new">Yes, I'm new</option>
-            <option value="existing">No, I'm an existing patient</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="service">Service of interest</label>
-          <select id="service" name="service">
-            <option value="checkup">Checkup &amp; cleaning</option>
-            <option value="emergency">Emergency / toothache</option>
-            <option value="cosmetic">Cosmetic / whitening</option>
-            <option value="orthodontics">Orthodontics / aligners</option>
-            <option value="implants">Dental implants</option>
-            <option value="kids">Kids dentistry</option>
-            <option value="other">Something else</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="preferred">Preferred day / time</label>
-          <input type="text" id="preferred" name="preferred" placeholder="e.g. Saturday morning" />
-        </div>
-        <div class="field appointment__message">
-          <label for="message">Message <span class="field__opt">(optional)</span></label>
-          <textarea id="message" name="message" rows="2" placeholder="Anything you'd like us to know?"></textarea>
-        </div>
-        <div class="appointment__submit">
-          <button type="submit" class="btn btn--primary btn--block btn--lg">Request Appointment</button>
+        <div class="appointment__actions">
           <p class="appointment__fineprint">We'll never share your details.</p>
+          <button type="submit" class="btn btn--primary btn--lg">Request Appointment</button>
         </div>
         <div class="appointment__success" id="apptSuccess" hidden>
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>
-          <p><strong>Thank you!</strong> Your request has been received. Our team will reach out within one business day to confirm your appointment.</p>
+          <p><strong>Thank you!</strong> Your request has been received. We'll reach out within 24 hours to confirm your appointment.</p>
         </div>
       </form>
     </div>
