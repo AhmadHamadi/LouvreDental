@@ -1,0 +1,12 @@
+{
+  "name": "louvre-dental-centre",
+  "version": "1.0.0",
+  "description": "Louvre Dental Centre website — static homepage with a Vercel serverless appointment form handler.",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "nodemailer": "^6.10.1"
+  }
+}
