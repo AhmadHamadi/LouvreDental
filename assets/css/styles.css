@@ -258,6 +258,7 @@ ul{margin:0;padding:0;list-style:none}
 .review-card__stars{color:#f5b301;letter-spacing:2px;margin-bottom:12px}
 .review-card blockquote{margin:0 0 16px;font-size:1rem;color:var(--ink);line-height:1.7}
 .review-card figcaption{font-family:var(--ff-ui);font-weight:600;color:var(--brand);font-size:.88rem}
+.reviews__cta{text-align:center;margin-top:38px}
 
 /* ---------- FAQ ---------- */
 .faq{background:var(--white)}
