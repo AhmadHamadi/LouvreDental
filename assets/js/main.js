@@ -133,16 +133,20 @@
   var revealEls = document.querySelectorAll(
     ".section__head, .value-card, .intro__copy, .intro__media, .service-card, .about__copy, .about__media, .why__copy, .why__media, .team-card, .insurance__copy, .insurance__item, .review-card, .faq__head, .faq-item, .contact__card"
   );
-  if ("IntersectionObserver" in window && revealEls.length) {
+  var prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!prefersReduced && "IntersectionObserver" in window && revealEls.length) {
     revealEls.forEach(function (el, i) {
       el.classList.add("reveal");
       el.style.transitionDelay = (i % 3) * 70 + "ms";
     });
+    var reveal = function (el) {
+      el.classList.add("in");
+    };
     var io = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
           if (entry.isIntersecting) {
-            entry.target.classList.add("in");
+            reveal(entry.target);
             io.unobserve(entry.target);
           }
         });
@@ -152,5 +156,13 @@
     revealEls.forEach(function (el) {
       io.observe(el);
     });
+    /* Safety net: if anything is still hidden after 4s (e.g. observer never
+       fired), reveal it so content can never get stuck invisible. */
+    window.setTimeout(function () {
+      revealEls.forEach(function (el) {
+        if (!el.classList.contains("in")) reveal(el);
+      });
+    }, 4000);
   }
+  /* If reduced motion is preferred, the CSS already keeps everything visible. */
 })();
